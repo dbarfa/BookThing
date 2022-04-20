@@ -1,1 +1,127 @@
-<p>sign-up works!</p>
+<div class="chapter">
+  <form [formGroup]="registerForm" (ngSubmit)="adduser()">
+    <h2 class="text-center mb-4">Register</h2>
+
+    <!-- username -->
+    <div
+      class="text-danger"
+      *ngIf="registerForm.get('username')?.errors?.['required'] && registerForm.get('username')?.touched"
+    >
+      Required
+    </div>
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Username"
+        formControlName="username"
+        id="username"
+        autocomplete="off"
+      />
+    </div>
+
+    <!-- email -->
+    <div
+      class="text-danger"
+      *ngIf="registerForm.get('email')?.errors?.['required'] && registerForm.get('email')?.touched"
+    >
+      Required
+    </div>
+    <div
+      class="text-danger"
+      *ngIf="registerForm.get('email')?.errors?.['email']"
+    >
+      Please enter a valid email
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">@</span>
+      <input
+        type="email"
+        class="form-control"
+        placeholder="Email"
+        formControlName="email"
+        id="email"
+      />
+    </div>
+    <!-- password -->
+    <div
+      class="text-danger"
+      *ngIf="registerForm.get('password')?.errors?.['required'] && registerForm.get('password')?.touched"
+    >
+      Required
+    </div>
+
+    <div class="input-group mb-3">
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Password"
+        formControlName="password"
+        id="password"
+      />
+    </div>
+    <!-- gender -->
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        id="gender1"
+        value="male"
+        formControlName="gender"
+      />
+      <label class="form-check-label" for="gender1">Male</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        id="gender2"
+        value="female"
+        formControlName="gender"
+      />
+      <label class="form-check-label" for="gender2">Female</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        id="gender3"
+        value="other"
+        formControlName="gender"
+      />
+      <label class="form-check-label" for="gender3">Other</label>
+    </div>
+    <br />
+
+    <!-- confirm password
+    <div
+      class="text-danger"
+      *ngIf="registerForm.get('confirmPassword')?.errors?.['required'] && registerForm.get('confirmPassword')?.touched"
+    >
+      Required
+    </div>
+    <div
+      class="text-danger"
+      *ngIf="registerForm.get('')?.errors?.['notsamepassword'] && registerForm.get('confirmPassword')?.touched"
+    >
+      Not identical
+    </div>
+
+    <div class="input-group mb-3">
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Confirm password"
+        formControlName="confirmPassword"
+        id="confirmPassword"
+      />
+    </div> -->
+    <input
+      [disabled]="!registerForm.valid"
+      class="btn btn-primary mt-2"
+      type="submit"
+      value="Create account"
+    />
+  </form>
+</div>

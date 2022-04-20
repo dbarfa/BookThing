@@ -4,7 +4,7 @@ import { SecurityComponent } from './security/security.component';
 
 const routes: Routes = [
   {
-    path: 'demo',
+    path: 'security',
     component: SecurityComponent,
     loadChildren: () =>
       import('./security/security.module').then((m) => m.SecurityModule),

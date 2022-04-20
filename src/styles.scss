@@ -9,15 +9,12 @@
     align-items: center;
 }
 
-body{
-    background-color: #f5f2f0;
-}
 
 main {
-    min-width: 65%;
+    min-width: 100vw;
     min-height: 90vh;
     padding: 0% 2%;
-    background-color: #f5f2f0;
+    // background-color: #f5f2f0;
 }
 
 header{
@@ -27,7 +24,13 @@ header{
     margin: 2%;
     padding : 2%;
     background-color: white;
-    border-radius: 5px;
+    border-radius: .5rem;
+}
+.chapterB{
+	margin: 2%;
+	padding : 2%;
+	background-color: white;
+	border-radius: .5rem;
 }
 
 html, body { height: 100%; }
@@ -38,3 +41,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import '~@fortawesome/fontawesome-free/scss/brands.scss';
 @import '~mdb-angular-ui-kit/assets/scss/mdb.scss';
 
+@media (min-width: 1200px) {
+    main{min-width: 65%;}
+		.chapterB{
+			border: 2px solid rgba(229,229,229,1);
+			background-color: rgba(255,255,255,1);
+		}
+}
