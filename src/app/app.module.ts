@@ -21,9 +21,11 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component';
+import { HomeComponent } from './home/home.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent],
+  declarations: [AppComponent, NavComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -45,6 +47,7 @@ import { NavComponent } from './nav/nav.component';
     MdbValidationModule,
     BrowserAnimationsModule,
     MdbCollapseModule,
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
