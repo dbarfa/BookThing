@@ -12,9 +12,8 @@ import { LoginTestService } from './loginTest.service';
 @Injectable({
   providedIn: 'root',
 })
-export class CanLoginGuard implements CanActivate {
+export class IsLoggedGuard implements CanActivate {
   constructor(private isLogged: LoginTestService, private router: Router) {}
-
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -23,11 +22,12 @@ export class CanLoginGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    let logged = !this.isLogged.isLogged();
-    if (!logged) {
-      console.log('test1');
+    let logged = this.isLogged.isLogged();
 
-      this.router.navigate(['/home']);
+    if (!logged) {
+      console.log('testIsLogge');
+
+      this.router.navigate(['/security']);
     }
     return logged;
   }
