@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { SearchComponent } from './search/search.component';
 import { SecurityComponent } from './security/security.component';
 import { CanLoginGuard } from './services/can-login.guard';
 import { IsLoggedGuard } from './services/is-logged.guard';
@@ -15,6 +16,11 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [IsLoggedGuard],
+  },
+  {
+    path: 'search',
+    component: SearchComponent,
     canActivate: [IsLoggedGuard],
   },
   {

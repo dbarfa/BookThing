@@ -15,9 +15,8 @@ export class NavComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-  test() {
-    console.log('test');
 
-    this.router.navigate(['/home']);
+  test(text: string) {
+    this.router.navigate(['search'], { queryParams: { q: text } });
   }
 }

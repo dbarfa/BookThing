@@ -23,9 +23,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { NgChartsModule } from 'ng2-charts';
+import { SearchComponent } from './search/search.component';
+import { FormsModule } from '@angular/forms';
+import { ProfileComponent } from './profile/profile.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    NavComponent,
+    HomeComponent,
+    SearchComponent,
+    ProfileComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -48,6 +58,8 @@ import { NgChartsModule } from 'ng2-charts';
     BrowserAnimationsModule,
     MdbCollapseModule,
     NgChartsModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

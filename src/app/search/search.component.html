@@ -1,0 +1,43 @@
+<!-- <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Cover</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Image</th>
+    </tr>
+  </thead>
+</table> -->
+
+<ng-template #defaultImage
+  ><img src="https://openlibrary.org/images/icons/avatar_book-sm.png" />
+</ng-template>
+
+<div class="chapter">
+  <div class="chapterB" *ngFor="let i of values.docs">
+    <div class="chapter">
+      <ng-template [ngIf]="i.isbn?.length" [ngIfElse]="defaultImage">
+        <img
+          src="https://covers.openlibrary.org/b/isbn/{{ i.isbn[0] }}-M.jpg"
+        />
+      </ng-template>
+    </div>
+    <div class="chapterSmall">
+      <div class="chapter">{{ i.title }}</div>
+      <div class="chapter">{{ i.author_name }}</div>
+    </div>
+  </div>
+</div>
+
+<!-- <tbody>
+  <tr *ngFor="let i of values.docs">
+    <th scope="row">#</th>
+    <td>
+      <img src="https://covers.openlibrary.org/b/isbn/{{ i.isbn[0] }}-M.jpg" />
+    </td>
+    <td>{{ i.title }}</td>
+    <td>{{ i.author_name }}</td>
+    <td></td>
+  </tr>
+</tbody> -->

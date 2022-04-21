@@ -4,9 +4,16 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LoginTestService {
+  loginThing: boolean = true;
   constructor() {}
 
   isLogged() {
-    return true;
+    console.log(this.loginThing);
+
+    return this.loginThing;
+  }
+  loginDemo() {
+    this.loginThing = true;
+    console.log(this.loginThing);
   }
 }

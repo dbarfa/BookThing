@@ -1,0 +1,16 @@
+.chapterB {
+    display: flex;
+    background-color: black;
+}
+
+.chapter{
+    background-color: whitesmoke;
+}
+.chapterSmall{
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+    padding : 2%;
+    background-color: white;
+    border-radius: .5rem;
+}
