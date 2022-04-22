@@ -1,3 +1,5 @@
+import { NgxPaginationModule } from 'ngx-pagination';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -60,6 +62,7 @@ import { HttpClientModule } from '@angular/common/http';
     NgChartsModule,
     FormsModule,
     HttpClientModule,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

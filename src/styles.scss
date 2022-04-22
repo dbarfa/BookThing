@@ -33,6 +33,9 @@ header{
 	background-color: white;
 	border-radius: .5rem;
 }
+.my-pagination .ngx-pagination .current  {
+    background: gray;
+}
 .dbarfa{
     color: rgba(235, 229, 229, 0.719);
 }

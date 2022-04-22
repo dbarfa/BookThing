@@ -13,9 +13,21 @@
 <ng-template #defaultImage
   ><img src="https://openlibrary.org/images/icons/avatar_book-sm.png" />
 </ng-template>
-
+<div class="chapterPagination">
+  <pagination-controls
+    class="my-pagination"
+    (pageChange)="p = $event"
+  ></pagination-controls>
+</div>
 <div class="chapter">
-  <div class="chapterB" *ngFor="let i of values.docs">
+  <!-- start of pagination -->
+
+  <div
+    class="chapterB"
+    *ngFor="
+      let i of values.docs | paginate: { itemsPerPage: 5, currentPage: p }
+    "
+  >
     <div class="chapter">
       <ng-template [ngIf]="i.cover_i" [ngIfElse]="defaultImage">
         <img
@@ -32,6 +44,12 @@
     </div>
     <div class="chapter">This is some description stuff</div>
   </div>
+</div>
+<div class="chapterPagination">
+  <pagination-controls
+    class="my-pagination"
+    (pageChange)="p = $event"
+  ></pagination-controls>
 </div>
 
 <!-- <tbody>

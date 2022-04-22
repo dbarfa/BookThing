@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginTestService } from '../services/loginTest.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -11,12 +11,15 @@ export class NavComponent implements OnInit {
   // checks if user is logged in
   constructor(
     private LoginTestService: LoginTestService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {}
 
   test(text: string) {
-    this.router.navigate(['search'], { queryParams: { q: text } });
+    this.router.navigate(['search'], {
+      queryParams: { q: text },
+    });
   }
 }
