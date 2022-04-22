@@ -13,6 +13,7 @@ export class SearchComponent implements OnInit {
   values: any = [];
   query!: any;
   p: number = 1;
+  loading: boolean = true;
 
   constructor(
     private show: SearchService,
@@ -26,15 +27,16 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.activeRoute.queryParams.subscribe((params) => {
       this.query = params;
-      console.log(this.query.q);
     });
     this.getApiThing();
   }
 
   getApiThing() {
+    this.loading = true;
     this.show.get(this.query).subscribe((data) => {
-      console.log(data);
       this.values = data;
+      this.loading = false;
+      console.log(this.loading);
     });
   }
 }

@@ -31,9 +31,54 @@
     flex-grow: 3;
     justify-content: space-between;
 }
+
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 450px;
+
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid rgb(7, 7, 7);
+    border-color: rgb(14, 14, 14) transparent rgb(16, 15, 15) transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+
+
+
+@media (min-width: 1200px) {
+// h6{
+//     text-overflow: ellipsis;
+// white-space: nowrap;
+// overflow: hidden;
+// width:250px; // some width
+// }
 .chapterPagination{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 2%;
+}
 }
