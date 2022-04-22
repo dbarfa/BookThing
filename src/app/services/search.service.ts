@@ -8,9 +8,7 @@ import { IBook } from '../models/IBook';
 })
 export class SearchService {
   constructor(private http: HttpClient) {}
-  get() {
-    return this.http.get(
-      'http://openlibrary.org/search.json?q=the+lord+of+the+rings'
-    );
+  get(data: any) {
+    return this.http.get('http://openlibrary.org/search.json?q=' + data.q);
   }
 }

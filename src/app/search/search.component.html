@@ -17,16 +17,20 @@
 <div class="chapter">
   <div class="chapterB" *ngFor="let i of values.docs">
     <div class="chapter">
-      <ng-template [ngIf]="i.isbn?.length" [ngIfElse]="defaultImage">
+      <ng-template [ngIf]="i.cover_i" [ngIfElse]="defaultImage">
         <img
-          src="https://covers.openlibrary.org/b/isbn/{{ i.isbn[0] }}-M.jpg"
+          src="https://covers.openlibrary.org/b/id/{{ i.cover_i }}-M.jpg"
+          width="84"
         />
       </ng-template>
     </div>
     <div class="chapterSmall">
-      <div class="chapter">{{ i.title }}</div>
-      <div class="chapter">{{ i.author_name }}</div>
+      <div class="chapter">
+        <h5>{{ i.title }}</h5>
+      </div>
+      <div class="chapter"><small>by</small> {{ i.author_name }}</div>
     </div>
+    <div class="chapter">This is some description stuff</div>
   </div>
 </div>
 
