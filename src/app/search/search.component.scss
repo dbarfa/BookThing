@@ -5,14 +5,31 @@
 
 .chapter{
     background-color: rgb(255, 255, 255);
+    flex-grow: 1;
 }
 .chapterSmall{
+    display: flex;
+    flex-direction: column;
+    
+    margin: 2%;
+    padding : 2%;
+    background-color: white;
+    border-radius: .5rem;
+}
+.chapterSmallTwo{
     display: flex;
     flex-direction: column;
     margin: 2%;
     padding : 2%;
     background-color: white;
     border-radius: .5rem;
+
+}
+.dividerText{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 3;
+    justify-content: space-between;
 }
 .chapterPagination{
     display: flex;

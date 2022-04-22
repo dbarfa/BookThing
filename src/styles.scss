@@ -9,8 +9,8 @@
     align-items: center;
 }
 
-
 main {
+    // reduce width if it freaks out on mobile
     min-width: 100vw;
     min-height: 88.5vh;
     padding: 0% 2%;
