@@ -39,4 +39,7 @@ export class SearchComponent implements OnInit {
       console.log(this.loading);
     });
   }
+  scrollOnChange() {
+    window.scrollTo(0, 0);
+  }
 }

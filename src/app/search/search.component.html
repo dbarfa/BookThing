@@ -30,31 +30,32 @@
   >
     <div class="chapter">
       <ng-template [ngIf]="i.cover_i" [ngIfElse]="defaultImage">
-        <img
-          src="https://covers.openlibrary.org/b/id/{{ i.cover_i }}-M.jpg"
-          width="84"
-        />
+        <img src="https://covers.openlibrary.org/b/id/{{ i.cover_i }}-M.jpg" />
       </ng-template>
     </div>
     <div class="dividerText">
       <div class="chapterSmall">
         <div class="chapter">
           <h6>
-            <a href="http://openlibrary.org{{ i.key }}">{{
-              (i.title | slice: 0:18) + (i.title.length > 18 ? "..." : "")
+            <a href="http://openlibrary.org{{ i.key }}" title="{{ i.title }}">{{
+              (i.title | slice: 0:15) + (i.title.length > 15 ? "..." : "")
             }}</a>
           </h6>
         </div>
         <div class="chapter">
           <small>by</small>
-          {{( i.author_name?.[0]|slice: 0:15) + (i.author_name?.[0].length>15?'...' : '')}}
+          {{( i.author_name?.[0]|slice: 0:14) + (i.author_name?.[0].length>14?'...' : '')}}
         </div>
       </div>
       <div class="chapterSmallTwo">
         <div class="chapter">
-          <button class="btn btn-outline-primary m-2">Add as Read</button>
+          <button type="button" class="btn btn-outline-primary m-2">
+            Add as Read
+          </button>
 
-          <button class="btn btn-outline-danger m-2">Add as To-Read</button>
+          <button type="button" class="btn btn-outline-danger m-2">
+            Add as To-Read
+          </button>
         </div>
       </div>
     </div>
@@ -62,6 +63,7 @@
 </div>
 <div class="chapterPagination" *ngIf="!loading">
   <pagination-controls
+    (pageChange)="scrollOnChange()"
     class="my-pagination"
     (pageChange)="p = $event"
   ></pagination-controls>
