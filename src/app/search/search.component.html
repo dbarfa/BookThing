@@ -63,9 +63,8 @@
 </div>
 <div class="chapterPagination" *ngIf="!loading">
   <pagination-controls
-    (pageChange)="scrollOnChange()"
+    (pageChange)="scrollOnChange($event)"
     class="my-pagination"
-    (pageChange)="p = $event"
   ></pagination-controls>
 </div>
 <div class="center" *ngIf="loading">

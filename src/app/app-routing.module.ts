@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { SecurityComponent } from './security/security.component';
-import { CanLoginGuard } from './services/can-login.guard';
-import { IsLoggedGuard } from './services/is-logged.guard';
+import { CanLoginGuard } from './guards/can-login.guard';
+import { IsLoggedGuard } from './guards/is-logged.guard';
 
 const routes: Routes = [
   {
@@ -29,7 +29,11 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

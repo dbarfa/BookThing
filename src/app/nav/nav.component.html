@@ -104,7 +104,12 @@
           </li>
           <li><hr class="dropdown-divider" /></li>
           <li>
-            <a class="dropdown-item" routerLink="#">Logout</a>
+            <a
+              class="dropdown-item"
+              routerLink="security/sign-in"
+              (click)="logout()"
+              >Logout</a
+            >
           </li>
         </ul>
       </li>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../services/search.service';
-import { IBook } from '../models/IBook';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -9,7 +8,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  model!: IBook[];
   values: any = [];
   query!: any;
   p: number = 1;
@@ -39,7 +37,8 @@ export class SearchComponent implements OnInit {
       console.log(this.loading);
     });
   }
-  scrollOnChange() {
+  scrollOnChange(p: any) {
+    this.p = p;
     window.scrollTo(0, 0);
   }
 }

@@ -1,5 +1,5 @@
 <div class="chapter">
-  <form [formGroup]="loginForm">
+  <form [formGroup]="loginForm" (ngSubmit)="submit()">
     <h2 class="text-center mb-4">Login</h2>
 
     <!-- username -->

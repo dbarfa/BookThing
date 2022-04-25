@@ -7,13 +7,15 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoginTestService } from './loginTest.service';
+import { LoginTestService } from '../services/loginTest.service';
+import { SessionService } from '../services/session.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class IsLoggedGuard implements CanActivate {
-  constructor(private isLogged: LoginTestService, private router: Router) {}
+export class CanLoginGuard implements CanActivate {
+  constructor(private isLogged: SessionService, private router: Router) {}
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -22,12 +24,11 @@ export class IsLoggedGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    let logged = this.isLogged.isLogged();
-
+    let logged = !this.isLogged.isLogged;
     if (!logged) {
-      console.log('testIsLogge');
+      console.log('test1');
 
-      this.router.navigate(['/security']);
+      this.router.navigate(['/home']);
     }
     return logged;
   }

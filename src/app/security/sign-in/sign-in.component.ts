@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginTestService } from 'src/app/services/loginTest.service';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,7 +14,8 @@ export class SignInComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private loginTest: LoginTestService,
-    private router: Router
+    private router: Router,
+    private session: SessionService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +32,24 @@ export class SignInComponent implements OnInit {
     });
   }
   demoLogin() {
-    this.loginTest.loginDemo();
+    console.log('test');
+  }
+
+  submit() {
+    if (this.loginForm.invalid) {
+      return;
+    }
+    console.log(this.loginForm.value);
+
+    this.loginTest.login(this.loginForm.value).subscribe({
+      next: (auth) => {
+        this.session.save(auth.token);
+      
+        this.router.navigateByUrl('');
+      },
+      error: () => {
+        console.log('Bad Credentials');
+      },
+    });
   }
 }
