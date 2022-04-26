@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { LoginTestService } from 'src/app/services/loginTest.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,7 +12,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SignUpComponent implements OnInit {
   registerForm!: FormGroup;
-  constructor(private _fb: FormBuilder) {}
+  constructor(
+    private _fb: FormBuilder,
+    private loginTest: LoginTestService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.registerForm = this._fb.group({
@@ -26,16 +34,36 @@ export class SignUpComponent implements OnInit {
       password: [null, [Validators.required]],
     });
   }
+
+  showSuccess() {
+    this.toastr.success('Plese sign-in', 'Registration complete!', {
+      progressBar: true,
+      closeButton: true,
+    });
+  }
+
+  showFailure() {
+    this.toastr.error('Please retry', 'Username taken', {
+      progressBar: true,
+      closeButton: true,
+    });
+  }
+
   adduser() {
-    if (this.registerForm.valid) {
-      console.log('form is valid');
-      console.log(this.registerForm.value.username);
-      console.log(this.registerForm.value.email);
-      console.log(this.registerForm.value.gender);
-      console.log(this.registerForm.value.password);
-    } else {
-      console.log('not valid');
+    if (this.registerForm.invalid) {
+      return;
     }
+    console.log(this.registerForm.value);
+    this.loginTest.register(this.registerForm.value).subscribe({
+      next: () => {
+        this.showSuccess();
+        this.router.navigate(['security/sign-in']);
+      },
+      error: () => {
+        this.showFailure();
+        console.log('username already in atabase, add toastr');
+      },
+    });
   }
 }
 

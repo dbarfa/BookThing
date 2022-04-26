@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LoginTestService } from 'src/app/services/loginTest.service';
 import { SessionService } from 'src/app/services/session.service';
 
@@ -15,7 +16,8 @@ export class SignInComponent implements OnInit {
     private _fb: FormBuilder,
     private loginTest: LoginTestService,
     private router: Router,
-    private session: SessionService
+    private session: SessionService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +37,20 @@ export class SignInComponent implements OnInit {
     console.log('test');
   }
 
+  showSuccess() {
+    this.toastr.success(this.loginForm.value.username, 'Welcome!', {
+      progressBar: true,
+      closeButton: true,
+    });
+  }
+
+  showError() {
+    this.toastr.error('Bad Credentials', '', {
+      progressBar: true,
+      closeButton: true,
+    });
+  }
+
   submit() {
     if (this.loginForm.invalid) {
       return;
@@ -44,11 +60,11 @@ export class SignInComponent implements OnInit {
     this.loginTest.login(this.loginForm.value).subscribe({
       next: (auth) => {
         this.session.save(auth.token);
-      
+        this.showSuccess();
         this.router.navigateByUrl('');
       },
       error: () => {
-        console.log('Bad Credentials');
+        this.showError();
       },
     });
   }
