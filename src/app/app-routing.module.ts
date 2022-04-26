@@ -5,6 +5,7 @@ import { SearchComponent } from './search/search.component';
 import { SecurityComponent } from './security/security.component';
 import { CanLoginGuard } from './guards/can-login.guard';
 import { IsLoggedGuard } from './guards/is-logged.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchComponent,
+    canActivate: [IsLoggedGuard],
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
     canActivate: [IsLoggedGuard],
   },
   {

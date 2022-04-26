@@ -10,6 +10,8 @@
   </thead>
 </table> -->
 
+<div class="empty"></div>
+
 <ng-template #defaultImage
   ><img src="https://openlibrary.org/images/icons/avatar_book-sm.png" />
 </ng-template>
@@ -37,24 +39,29 @@
       <div class="chapterSmall">
         <div class="chapter">
           <h6>
-            <a href="http://openlibrary.org{{ i.key }}" title="{{ i.title }}">{{
-              (i.title | slice: 0:15) + (i.title.length > 15 ? "..." : "")
-            }}</a>
+            <a
+              href="http://openlibrary.org{{ i.key }}.json"
+              title="{{ i.title }}"
+              >{{
+                (i.title | slice: 0:15) + (i.title.length > 15 ? "..." : "")
+              }}</a
+            >
           </h6>
         </div>
         <div class="chapter">
-          <small>by</small>
+          <small>by </small>
+
           {{( i.author_name?.[0]|slice: 0:14) + (i.author_name?.[0].length>14?'...' : '')}}
         </div>
       </div>
       <div class="chapterSmallTwo">
         <div class="chapter">
-          <button type="button" class="btn btn-outline-primary m-2">
-            Add as Read
+          <button type="button" class="btn btn-outline-primary m-2" mdbRipple>
+            Read ....
           </button>
 
           <button type="button" class="btn btn-outline-danger m-2">
-            Add as To-Read
+            To-Read
           </button>
         </div>
       </div>
@@ -70,25 +77,3 @@
 <div class="center" *ngIf="loading">
   <div class="lds-dual-ring" *ngIf="loading"></div>
 </div>
-<!-- <div class="progress">
-  <div
-    class="progress-bar progress-bar-striped progress-bar-animated"
-    role="progressbar"
-    aria-valuenow="75"
-    aria-valuemin="0"
-    aria-valuemax="100"
-    style="width: 75%"
-  ></div>
-</div> -->
-
-<!-- <tbody>
-  <tr *ngFor="let i of values.docs">
-    <th scope="row">#</th>
-    <td>
-      <img src="https://covers.openlibrary.org/b/isbn/{{ i.isbn[0] }}-M.jpg" />
-    </td>
-    <td>{{ i.title }}</td>
-    <td>{{ i.author_name }}</td>
-    <td></td>
-  </tr>
-</tbody> -->

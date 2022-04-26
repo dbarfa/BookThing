@@ -74,13 +74,16 @@
         #inputSearch
         type="text"
         class="form-control d-flex input-group w-auto"
-        placeholder="Type query"
+        placeholder="Search"
         aria-label="Search"
         (keyup.enter)="test(inputSearch.value)"
       />
-      <span class="input-group-text border-0 d-none d-lg-flex"
-        ><i class="fas fa-search"></i
-      ></span>
+      <button
+        (click)="test(inputSearch.value)"
+        class="input-group-text border-0 d-lg-flex"
+      >
+        <i class="fas fa-search"></i>
+      </button>
     </div>
 
     <!-- Icon dropdown -->
@@ -97,7 +100,7 @@
         </a>
         <ul mdbDropdownMenu class="dropdown-menu">
           <li>
-            <a class="dropdown-item" routerLink="#">My Profile</a>
+            <a class="dropdown-item" routerLink="/profile">My Profile</a>
           </li>
           <li>
             <a class="dropdown-item" routerLink="#">Settings</a>
@@ -106,7 +109,7 @@
           <li>
             <a
               class="dropdown-item"
-              routerLink="security/sign-in"
+              routerLink="/security/sign-in"
               (click)="logout()"
               >Logout</a
             >

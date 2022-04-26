@@ -11,7 +11,6 @@ export class LoginTestService {
   constructor(private _http: HttpClient) {}
 
   login(form: SignInComponent): Observable<Auth> {
-    console.log('test here');
 
     return this._http.post<Auth>('http://localhost:8000/api/login_check', form);
   }

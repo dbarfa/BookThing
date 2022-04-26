@@ -10,6 +10,10 @@ export class SearchService {
   get(data: any): Observable<any> {
     console.log(data.q);
 
-    return this.http.get<any>('http://openlibrary.org/search.json?q=' + data.q);
+    return this.http.get<any>(
+      'http://openlibrary.org/search.json?q=' +
+        data.q +
+        '&fields=cover_i,title,key,author_name&limit=50'
+    );
   }
 }

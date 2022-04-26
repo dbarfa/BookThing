@@ -37,8 +37,13 @@ export class SearchComponent implements OnInit {
       console.log(this.loading);
     });
   }
-  scrollOnChange(p: any) {
-    this.p = p;
-    window.scrollTo(0, 0);
+
+  scrollOnChange(event: any) {
+    this.p = event;
+    console.log('42');
+    // the setTimeout is a temp fix
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 1);
   }
 }

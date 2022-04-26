@@ -68,7 +68,13 @@ img {
     }
   }
 
-
+  .chapterPagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+    margin-left: -10%;
+}
 
 
 @media (min-width: 1200px) {
@@ -82,9 +88,7 @@ img {
 	width: 130px;
 }
 .chapterPagination{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2%;
+  margin-left: 0%;
+
 }
 }
