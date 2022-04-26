@@ -34,7 +34,7 @@
 
 <nav
   *ngIf="logged"
-  class="navbar navbar-expand-lg fixed-top navbar-light bg-light"
+  class="navbar navbar-expand-sm fixed-top navbar-light bg-light"
 >
   <div class="container-fluid">
     <button
@@ -70,24 +70,26 @@
         </li>
       </ul>
 
-      <input
-        #inputSearch
-        type="text"
-        class="form-control d-flex input-group w-auto"
-        placeholder="Search"
-        aria-label="Search"
-        (keyup.enter)="test(inputSearch.value)"
-      />
-      <button
-        (click)="test(inputSearch.value)"
-        class="input-group-text border-0 d-lg-flex"
-      >
-        <i class="fas fa-search"></i>
-      </button>
+      <div class="d-flex input-group w-auto">
+        <input
+          #inputSearch
+          type="text"
+          class="form-control"
+          placeholder="Search"
+          aria-label="Search"
+          (keyup.enter)="test(inputSearch.value)"
+        />
+        <button
+          (click)="test(inputSearch.value)"
+          class="input-group-text border-0 d-lg-flex"
+        >
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
     </div>
 
     <!-- Icon dropdown -->
-    <ul class="navbar-nav d-flex flex-row">
+    <ul class="navbar-nav d-flex flex-row fixedNavBarItem">
       <li mdbDropdown class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle"

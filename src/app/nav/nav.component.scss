@@ -1,0 +1,14 @@
+@media screen and (max-width:575px) {
+  .fixedNavBarItem {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+  }
+  .navbar-brand {
+    position: absolute;
+    width: 67%;
+    text-align: center;
+    margin-left: 15%;
+    top: 3px;
+  }
+}
