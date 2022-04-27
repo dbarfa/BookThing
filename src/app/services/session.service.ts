@@ -25,7 +25,6 @@ export class SessionService {
     this.token = token;
     this.isLogged = true;
     this.decodedToken = jwtDecode(token);
-    console.log(this.decodedToken);
 
     localStorage.setItem('TOKEN', token);
     this.sessionChanged.next(true);

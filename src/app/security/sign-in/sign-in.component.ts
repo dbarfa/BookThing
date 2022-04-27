@@ -33,9 +33,6 @@ export class SignInComponent implements OnInit {
       password: [null, [Validators.required]],
     });
   }
-  demoLogin() {
-    console.log('test');
-  }
 
   showSuccess() {
     this.toastr.success(this.loginForm.value.username, 'Welcome!', {
@@ -55,7 +52,8 @@ export class SignInComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    console.log(this.loginForm.value);
+
+    console.log('test' + this.loginForm.value);
 
     this.loginTest.login(this.loginForm.value).subscribe({
       next: (auth) => {

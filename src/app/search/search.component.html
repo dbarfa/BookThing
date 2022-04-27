@@ -56,7 +56,12 @@
       </div>
       <div class="chapterSmallTwo">
         <div class="chapter">
-          <button type="button" class="btn btn-outline-primary m-2" mdbRipple>
+          <button
+            (click)="getBook(i.key)"
+            type="button"
+            class="btn btn-outline-primary m-2"
+            mdbRipple
+          >
             Read ....
           </button>
 
