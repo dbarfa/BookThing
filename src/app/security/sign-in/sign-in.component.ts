@@ -53,7 +53,6 @@ export class SignInComponent implements OnInit {
       return;
     }
 
-    console.log('test' + this.loginForm.value);
 
     this.loginTest.login(this.loginForm.value).subscribe({
       next: (auth) => {
