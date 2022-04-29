@@ -23,9 +23,26 @@
   <div class="chapterB">
     <h5>Read(<small>count</small>)</h5>
 
-    <div class="chapter">
+    <div
+      class="chapter"
+      *ngFor="let item of values; let i = index"
+      [attr.data-index]
+    >
       <hr />
 
+      <p>{{ item?.title }}</p>
+      <small>by {{ item.authors[0].author.key }}</small>
+      <br />
+      <img
+        class="m-3"
+        src="https://openlibrary.org/images/icons/avatar_book-sm.png"
+      />
+      <br />
+      <button type="button" class="btn btn-outline-danger m-2">delete</button>
+    </div>
+
+    <!-- <div class="chapter">
+      <hr />
       <p>Title</p>
       <small>by</small>
       <br />
@@ -37,20 +54,6 @@
       <button type="button" class="btn btn-outline-primary m-2">edit</button>
       <button type="button" class="btn btn-outline-danger m-2">delete</button>
     </div>
-
-    <div class="chapter">
-      <hr />
-      <p>Title</p>
-      <small>by</small>
-      <br />
-      <img
-        class="m-3"
-        src="https://openlibrary.org/images/icons/avatar_book-sm.png"
-      />
-      <br />
-      <button type="button" class="btn btn-outline-primary m-2">edit</button>
-      <button type="button" class="btn btn-outline-danger m-2">delete</button>
-    </div>
+  </div> -->
   </div>
 </div>
-
