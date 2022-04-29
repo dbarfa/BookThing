@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
   decodedToken: Token = this.session.decodedToken;
   values: any[] = [];
   indexOfLibrary!: any;
+  countOfIndex: any = 0;
   constructor(
     private session: SessionService,
     private profileService: ProfileService
@@ -24,9 +25,12 @@ export class ProfileComponent implements OnInit {
   getAllRead() {
     return this.profileService.getAllRead().subscribe((data) => {
       this.indexOfLibrary = data;
+      console.log(this.indexOfLibrary);
+
       for (const item of data) {
-        this.getReadIndividualRequest(item);
+        this.getReadIndividualRequest(item.work);
       }
+      this.countOfIndex = this.indexOfLibrary.length;
       console.log(this.values);
     });
   }

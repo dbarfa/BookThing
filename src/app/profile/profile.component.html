@@ -1,6 +1,9 @@
 <h5>username : {{ decodedToken.username }}</h5>
 
 <hr />
+<ng-template #defaultImage
+  ><img src="https://openlibrary.org/images/icons/avatar_book-sm.png" />
+</ng-template>
 
 <div class="chapterV">
   <div class="chapterB">
@@ -21,7 +24,10 @@
   </div>
 
   <div class="chapterB">
-    <h5>Read(<small>count</small>)</h5>
+    <h5>
+      Read(<small>{{ countOfIndex }}</small
+      >)
+    </h5>
 
     <div
       class="chapter"
@@ -31,12 +37,13 @@
       <hr />
 
       <p>{{ item?.title }}</p>
-      <small>by {{ item.authors[0].author.key }}</small>
+      <small>by {{ indexOfLibrary[i].author }}</small>
       <br />
-      <img
-        class="m-3"
-        src="https://openlibrary.org/images/icons/avatar_book-sm.png"
-      />
+      <ng-template [ngIf]="item.covers?.[0] " [ngIfElse]="defaultImage">
+        <img
+          src="https://covers.openlibrary.org/b/id/{{ item.covers?.[0]  }}-M.jpg"
+        />
+      </ng-template>
       <br />
       <button type="button" class="btn btn-outline-danger m-2">delete</button>
     </div>

@@ -65,7 +65,7 @@ export class SearchComponent implements OnInit {
   }
 
   postReadBook(data: any) {
-    this.readData = { book: data.key };
+    this.readData = { book: data.key, author: data.author_name?.[0] };
     this.searchService.readbutton(this.readData).subscribe({
       next: () => {
         console.log('ok');

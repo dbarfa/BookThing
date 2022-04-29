@@ -6,3 +6,19 @@
     text-align: center;
     width:50%
 }
+
+img {
+	width: 100px;
+    margin: 2%;
+}
+@media (min-width: 560) {
+    // h6{
+    //     text-overflow: ellipsis;
+    // white-space: nowrap;
+    // overflow: hidden;
+    // width:250px; // some width
+    // }
+        img {
+            width: 130px;
+        }
+    }
