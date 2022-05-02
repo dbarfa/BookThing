@@ -17,7 +17,15 @@ export class SearchService {
   readbutton(data: any): Observable<any> {
     return this.http.post<any>('http://localhost:8000/api/read/add', data, {
       headers: new HttpHeaders({
-        "Authorization": 'Bearer ' + localStorage.getItem('TOKEN'),
+        Authorization: 'Bearer ' + localStorage.getItem('TOKEN'),
+      }),
+    });
+  }
+
+  toreadbutton(data: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8000/api/toread/add', data, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('TOKEN'),
       }),
     });
   }

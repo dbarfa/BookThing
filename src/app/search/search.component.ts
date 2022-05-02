@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit {
   p: number = 1;
   loading: boolean = true;
   readData!: any;
+  toReadData!: any;
 
   constructor(
     private searchService: SearchService,
@@ -74,6 +75,21 @@ export class SearchComponent implements OnInit {
       error: () => {
         console.log('error');
         this.showFailure(data, 'read');
+      },
+    });
+    console.log(this.readData);
+  }
+
+  postToReadBook(data: any) {
+    this.toReadData = { book: data.key, author: data.author_name?.[0] };
+    this.searchService.toreadbutton(this.toReadData).subscribe({
+      next: () => {
+        console.log('ok');
+        this.showSuccess(data, 'to read');
+      },
+      error: () => {
+        console.log('error');
+        this.showFailure(data, 'to read');
       },
     });
     console.log(this.readData);

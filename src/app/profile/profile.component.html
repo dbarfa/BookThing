@@ -1,24 +1,39 @@
-<h5>username : {{ decodedToken.username }}</h5>
+<h5 *ngIf="!loading">username : {{ decodedToken.username }}</h5>
 
-<hr />
+<hr *ngIf="!loading" />
 <ng-template #defaultImage
   ><img src="https://openlibrary.org/images/icons/avatar_book-sm.png" />
 </ng-template>
 
 <!-- To Read -->
 
-<div class="chapterV">
+<div class="chapterV" *ngIf="!loading">
   <div class="chapterB">
-    <h5>To-Read(<small>count</small>)</h5>
-    <hr />
-    <div class="chapter">
-      <p>Title</p>
-      <small>by</small>
+    <h5>
+      To-Read(<small>{{ countOfIntexToRead }}</small
+      >)
+    </h5>
+
+    <div
+      class="chapter"
+      *ngFor="let item of valuesToRead; let i = index"
+      [attr.data-index]
+    >
+      <hr />
+
+      <h6>
+        <a
+          href="http://openlibrary.org{{ indexOfToReadLibrary[i].work }}.json"
+          >{{ item?.title }}</a
+        >
+      </h6>
+      <small>by {{ indexOfToReadLibrary[i].author }}</small>
       <br />
-      <img
-        class="m-3"
-        src="https://openlibrary.org/images/icons/avatar_book-sm.png"
-      />
+      <ng-template [ngIf]="item.covers?.[0] " [ngIfElse]="defaultImage">
+        <img
+          src="https://covers.openlibrary.org/b/id/{{ item.covers?.[0]  }}-M.jpg"
+        />
+      </ng-template>
       <br />
       <button type="button" class="btn btn-outline-primary m-2">read</button>
       <button type="button" class="btn btn-outline-danger m-2">delete</button>
@@ -27,7 +42,7 @@
 
   <!-- Read -->
 
-  <div class="chapterB">
+  <div class="chapterB" *ngIf="!loading">
     <h5>
       Read(<small>{{ countOfIndex }}</small
       >)
@@ -41,11 +56,11 @@
       <hr />
 
       <h6>
-        <a href="http://openlibrary.org{{ indexOfLibrary[i].work }}.json">{{
+        <a href="http://openlibrary.org{{ indexOfReadLibrary[i].work }}.json">{{
           item?.title
         }}</a>
       </h6>
-      <small>by {{ indexOfLibrary[i].author }}</small>
+      <small>by {{ indexOfReadLibrary[i].author }}</small>
       <br />
       <ng-template [ngIf]="item.covers?.[0] " [ngIfElse]="defaultImage">
         <img
@@ -71,4 +86,8 @@
     </div>
   </div> -->
   </div>
+</div>
+
+<div class="center" *ngIf="loading">
+  <div class="lds-dual-ring" *ngIf="loading"></div>
 </div>
