@@ -5,6 +5,8 @@
   ><img src="https://openlibrary.org/images/icons/avatar_book-sm.png" />
 </ng-template>
 
+<!-- To Read -->
+
 <div class="chapterV">
   <div class="chapterB">
     <h5>To-Read(<small>count</small>)</h5>
@@ -23,6 +25,8 @@
     </div>
   </div>
 
+  <!-- Read -->
+
   <div class="chapterB">
     <h5>
       Read(<small>{{ countOfIndex }}</small
@@ -36,7 +40,11 @@
     >
       <hr />
 
-      <p>{{ item?.title }}</p>
+      <h6>
+        <a href="http://openlibrary.org{{ indexOfLibrary[i].work }}.json">{{
+          item?.title
+        }}</a>
+      </h6>
       <small>by {{ indexOfLibrary[i].author }}</small>
       <br />
       <ng-template [ngIf]="item.covers?.[0] " [ngIfElse]="defaultImage">
