@@ -19,4 +19,16 @@ export class ProfileService {
   getBookData(data: string): Observable<any> {
     return this.http.get<any>('https://openlibrary.org' + data + '.json');
   }
+
+  deleteBook(data: string, category: string): Observable<any> {
+    return this.http.post<any>(
+      'http://localhost:8000/api/' + category + '/delete',
+      data,
+      {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + localStorage.getItem('TOKEN'),
+        }),
+      }
+    );
+  }
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin, from, mergeMap, of, switchMap, switchScan, tap } from 'rxjs';
 import { Token } from '../models/token.model';
 import { SessionService } from '../services/session.service';
 import { ProfileService } from '../servicesAPI/profile.service';
+import { SearchService } from '../servicesAPI/search.service';
 
 @Component({
   selector: 'app-profile',
@@ -21,48 +23,84 @@ export class ProfileComponent implements OnInit {
   countOfIntexToRead: any = 0;
 
   loading: boolean = true;
+  imageLoader: boolean = true;
+
+  toReadtransfer!: any;
 
   constructor(
     private session: SessionService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
-    this.getAllRead();
-    this.getAllToRead();
-  }
+    // this.getAllRead();
+    // this.getAllToRead();
 
-  getAllRead() {
+    forkJoin([
+      this.profileService.getAllRead('read'),
+      this.profileService.getAllRead('toread'),
+    ]).subscribe(([data1, data2]) => {
+      this.indexOfReadLibrary = data1;
+      this.indexOfToReadLibrary = data2;
 
-    return this.profileService.getAllRead('read').subscribe((data) => {
-      this.indexOfReadLibrary = data;
+      // for (const item of data1) {
+      //   this.getReadIndividualRequest(item.work);
+      // }
+      forkJoin([
+        from(data1).pipe(
+          mergeMap((d: any) =>
+            this.profileService
+              .getBookData(d.work)
+              .pipe(tap((data) => this.values.push(data)))
+          )
+        ),
+        from(data2).pipe(
+          mergeMap((d: any) =>
+            this.profileService
+              .getBookData(d.work)
+              .pipe(tap((data) => this.valuesToRead.push(data)))
+          )
+        ),
+      ]).subscribe({ complete: () => (this.loading = false) });
 
-      for (const item of data) {
-        this.getReadIndividualRequest(item.work);
-      }
       this.countOfIndex = this.indexOfReadLibrary.length;
+
+      // for (const item of data2) {
+      //   this.getReadIndividualRequestToRead(item.work);
+      // }
+      this.countOfIntexToRead = this.indexOfToReadLibrary.length;
     });
   }
-  getReadIndividualRequest(bookId: string) {
-    return this.profileService.getBookData(bookId).subscribe((data) => {
-      this.values.push(data);
-    });
+  onLoad() {
+    this.imageLoader = false;
+  }
+  // getReadIndividualRequest(bookId: string) {
+  //   return this.profileService.getBookData(bookId).subscribe((data) => {
+  //     this.values.push(data);
+  //   });
+  // }
+
+  // getReadIndividualRequestToRead(bookId: string) {
+  //   return this.profileService.getBookData(bookId).subscribe((data) => {
+  //     this.valuesToRead.push(data);
+  //   });
+  // }
+
+  deleteItem(data: any, category: string) {
+    let dataBook: any = { book: data };
+
+    this.profileService.deleteBook(dataBook, category).subscribe();
   }
 
-  getReadIndividualRequestToRead(bookId: string) {
-    return this.profileService.getBookData(bookId).subscribe((data) => {
-      this.valuesToRead.push(data);
+  transferRead(data: any, data2: any) {
+    this.toReadtransfer = { book: data, author: data2 };
+    this.profileService.deleteBook(this.toReadtransfer, 'toread').subscribe();
+    this.searchService.readbutton(this.toReadtransfer).subscribe((data) => {
+      console.log(data);
     });
   }
-
-  getAllToRead() {
-    return this.profileService.getAllRead('toread').subscribe((data) => {
-      this.indexOfToReadLibrary = data;
-      for (const item of data) {
-        this.getReadIndividualRequestToRead(item.work);
-      }
-      this.countOfIntexToRead = this.indexOfReadLibrary.length;
-      this.loading = false;
-    });
+  refresh(): void {
+    window.location.reload();
   }
 }

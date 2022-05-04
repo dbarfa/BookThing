@@ -15,12 +15,22 @@
   <div
     class="chapterB"
     *ngFor="
-      let i of values.docs | paginate: { itemsPerPage: 5, currentPage: p }
+      let item of values.docs | paginate: { itemsPerPage: 5, currentPage: p };
+      let i = index
     "
+    [attr.data-index]
   >
     <div class="chapter">
-      <ng-template [ngIf]="i.cover_i" [ngIfElse]="defaultImage">
-        <img src="https://covers.openlibrary.org/b/id/{{ i.cover_i }}-M.jpg" />
+      <ng-template [ngIf]="item.cover_i" [ngIfElse]="defaultImage">
+        <img
+          [hidden]="imageLoader"
+          (load)="onLoad()"
+          src="https://covers.openlibrary.org/b/id/{{ item.cover_i }}-M.jpg"
+        />
+        <img
+          *ngIf="imageLoader"
+          src="https://openlibrary.org/images/icons/avatar_book-sm.png"
+        />
       </ng-template>
     </div>
     <div class="dividerText">
@@ -28,10 +38,11 @@
         <div class="chapter">
           <h6>
             <a
-              href="http://openlibrary.org{{ i.key }}.json"
-              title="{{ i.title }}"
+              href="http://openlibrary.org{{ item.key }}.json"
+              title="{{ item.title }}"
               >{{
-                (i.title | slice: 0:15) + (i.title.length > 15 ? "..." : "")
+                (item.title | slice: 0:15) +
+                  (item.title.length > 15 ? "..." : "")
               }}</a
             >
           </h6>
@@ -39,22 +50,28 @@
         <div class="chapter">
           <small>by </small>
 
-          {{( i.author_name?.[0]|slice: 0:14) + (i.author_name?.[0].length>14?'...' : '')}}
+          {{( item.author_name?.[0]|slice: 0:14) + (item.author_name?.[0].length>14?'...' : '')}}
         </div>
       </div>
       <div class="chapterSmallTwo">
         <div class="chapter">
           <button
-            (click)="postReadBook(i)"
+            (click)="
+              postReadBook(item);
+              canDelete ? values.docs.splice(i, 1) : values.docs.splice(i, 1)
+            "
             type="button"
             class="btn btn-outline-primary m-2"
-            mdbRipple
           >
-            Read ....
+            &zwnj; &zwnj; Read &zwnj; &#x200B;
           </button>
 
+          <!-- TODO fix the button -->
           <button
-            (click)="postToReadBook(i)"
+            (click)="
+              postToReadBook(item);
+              canDelete ? values.docs.splice(i, 1) : values.docs.splice(i, 1)
+            "
             type="button"
             class="btn btn-outline-danger m-2"
           >
