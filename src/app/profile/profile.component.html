@@ -20,71 +20,79 @@
       [attr.data-index]
     >
       <hr />
-
       <h6>
-        <a
-          href="http://openlibrary.org{{ indexOfToReadLibrary[i].work }}.json"
-          >{{ item?.title }}</a
-        >
+        <a href="http://openlibrary.org{{ item.key }}.json">{{
+          item?.title
+        }}</a>
       </h6>
       <small>by {{ indexOfToReadLibrary[i].author }}</small>
       <br />
       <ng-template [ngIf]="item.covers?.[0] " [ngIfElse]="defaultImage">
+        <img *ngIf="imageLoader" #defaultImage />
         <img
-          src="https://covers.openlibrary.org/b/id/{{ item.covers?.[0]  }}-M.jpg"
+          [hidden]="imageLoader"
+          (load)="onLoad()"
+          src="https://covers.openlibrary.org/b/id/{{ item.covers?.[0] }}-M.jpg"
         />
       </ng-template>
       <br />
-      <button type="button" class="btn btn-outline-primary m-2">read</button>
-      <button type="button" class="btn btn-outline-danger m-2">delete</button>
+      <button
+        type="button"
+        class="btn btn-outline-primary m-2"
+        (click)="transferRead(item.key, indexOfToReadLibrary[i].author)"
+      >
+        read
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-danger m-2"
+        (click)="
+          deleteItem(item.key, 'toread');
+          valuesToRead.splice(i, 1);
+          countOfIntexToRead = countOfIntexToRead - 1
+        "
+      >
+        delete
+      </button>
     </div>
   </div>
-
   <!-- Read -->
-
   <div class="chapterB" *ngIf="!loading">
     <h5>
       Read(<small>{{ countOfIndex }}</small
       >)
     </h5>
-
     <div
       class="chapter"
       *ngFor="let item of values; let i = index"
       [attr.data-index]
     >
       <hr />
-
       <h6>
-        <a href="http://openlibrary.org{{ indexOfReadLibrary[i].work }}.json">{{
+        <a href="http://openlibrary.org{{ item.key }}.json">{{
           item?.title
         }}</a>
       </h6>
       <small>by {{ indexOfReadLibrary[i].author }}</small>
       <br />
-      <ng-template [ngIf]="item.covers?.[0] " [ngIfElse]="defaultImage">
+      <ng-template [ngIf]="item.covers?.[0]" [ngIfElse]="defaultImage">
         <img
           src="https://covers.openlibrary.org/b/id/{{ item.covers?.[0]  }}-M.jpg"
         />
       </ng-template>
       <br />
-      <button type="button" class="btn btn-outline-danger m-2">delete</button>
+      <button
+        type="button"
+        class="btn btn-outline-danger m-2"
+        (click)="
+          deleteItem(item.key, 'read');
+          values.splice(i, 1);
+          countOfIndex = countOfIndex - 1
+        "
+      >
+        delete
+      </button>
     </div>
-
-    <!-- <div class="chapter">
-      <hr />
-      <p>Title</p>
-      <small>by</small>
-      <br />
-      <img
-        class="m-3"
-        src="https://openlibrary.org/images/icons/avatar_book-sm.png"
-      />
-      <br />
-      <button type="button" class="btn btn-outline-primary m-2">edit</button>
-      <button type="button" class="btn btn-outline-danger m-2">delete</button>
-    </div>
-  </div> -->
   </div>
 </div>
 
